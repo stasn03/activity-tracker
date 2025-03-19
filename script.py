@@ -4,7 +4,7 @@ import pygetwindow as gw
 
 last_window= None
 def save_to_file(data):
-    with open(f"logs/{strftime("%Y-%m-%d", gmtime())}", "a") as file:
+    with open(f"logs/{strftime("%Y-%m-%d", gmtime())}.txt", "a", encoding= "utf-8") as file:
         file.write(f'[{strftime("%Y-%m-%d %H:%M", gmtime())}] {data} \n')
 
     
