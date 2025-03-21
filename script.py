@@ -16,8 +16,11 @@ class Activity_tracker:
             self.__save_to_file(f"Switched to: {active_window}")
             print(f"Switched to: {active_window}")
             self.last_window= active_window
+
         print(f"Typed: {key}")
         self.__save_to_file(f"Typed: {key}")
+        if str(key) == "Key.f12":
+            return False
 
 
 tracker= Activity_tracker()
