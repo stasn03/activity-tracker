@@ -9,8 +9,11 @@ class Activity_tracker:
 
     def __save_to_file(self, data):
         os.makedirs("logs", exist_ok= True)
-        with open(f'logs/{strftime("%Y-%m-%d", gmtime())}.txt', "a", encoding= "utf-8") as file:
-            file.write(f'[{strftime("%Y-%m-%d %H:%M", gmtime())}] {data} \n')
+        try:
+            with open(f'logs/{strftime("%Y-%m-%d", gmtime())}.txt', "a", encoding= "utf-8") as file:
+                file.write(f'[{strftime("%Y-%m-%d %H:%M", gmtime())}] {data} \n')
+        except Exception as e:
+            print(f"An error occured: {e}")
 
     def on_press(self, key):
         active_window= gw.getActiveWindowTitle()
