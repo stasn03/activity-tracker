@@ -1,13 +1,15 @@
 from pynput import keyboard
 from time import gmtime, strftime
 import pygetwindow as gw
+import os
 
 class Activity_tracker:
     def __init__(self):
         self.last_window= None
 
     def __save_to_file(self, data):
-        with open(f"logs/{strftime("%Y-%m-%d", gmtime())}.txt", "a", encoding= "utf-8") as file:
+        os.makedirs("logs", exist_ok= True)
+        with open(f'logs/{strftime("%Y-%m-%d", gmtime())}.txt', "a", encoding= "utf-8") as file:
             file.write(f'[{strftime("%Y-%m-%d %H:%M", gmtime())}] {data} \n')
 
     def on_press(self, key):
