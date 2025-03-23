@@ -3,7 +3,7 @@ from time import gmtime, strftime
 import pygetwindow as gw
 import os
 
-class Activity_tracker:
+class ActivityTracker:
     def __init__(self):
         self.last_window= None
 
@@ -28,7 +28,7 @@ class Activity_tracker:
             return False
 
 
-tracker= Activity_tracker()
+tracker= ActivityTracker()
 with keyboard.Listener(
     on_press= tracker.on_press
 ) as listener:
