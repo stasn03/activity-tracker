@@ -33,3 +33,5 @@ with keyboard.Listener(
     on_press= tracker.on_press
 ) as listener:
     listener.join()
+
+print("Hello")
