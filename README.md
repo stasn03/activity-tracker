@@ -1,28 +1,50 @@
-Overview
+# Activity Tracker
 
-The Activity Tracker is a Python script that logs user activity, including:
+This project tracks keyboard activity and logs the keys pressed along with the active window context (the application or window the user is interacting with). It stores the captured data in a PostgreSQL database for later analysis.
 
-    Active window changes (e.g., switching between applications).
+## Features
 
-    Keystrokes (e.g., keys pressed by the user).
+- Captures keyboard activity and logs the pressed keys.
+- Records the active window title to correlate key presses with the application the user is using.
+- Stores the data securely in a PostgreSQL database.
+- Stops capturing when a specific key (F12) is pressed.
 
-    The logs are saved to a text file in the logs/ directory, organized by date.
-Features:
+## Technologies Used
 
-    Window Tracking: Logs the title of the active window whenever it changes.
+- **Python** - Programming language used to develop the activity tracker.
+- **PostgreSQL** - Database used to store the tracked data.
+- **pynput** - Library for monitoring and controlling input devices.
+- **pygetwindow** - Library to retrieve the active window's title.
+- **psycopg2** - Library for PostgreSQL database interaction.
 
-    Keystroke Logging: Logs every key pressed by the user.
+## Prerequisites
 
-    Daily Logs: Saves logs to a new file each day in the logs/ directory.
+Before running this project, ensure that you have the following installed:
 
-    Quits the program if f12 is pressed.
+- Python 3.x
+- PostgreSQL database running and accessible
+- Required Python libraries:
+  - `pynput`
+  - `pygetwindow`
+  - `psycopg2`
 
-    Cross-Platform: Works on Windows, macOS, and Linux (requires pygetwindow and pynput).
+To install the required libraries, run:
 
-Installation Prerequisites
+```bash
+pip install pynput 
+pip install pygetwindow 
+pip install psycopg2
+```
 
-    Python 3.x
+### Setup
+1. Clone this repository:
+```bash
+git clone "https://github.com/stasn03/activity-tracker.git"
+```
+2. Setup your own PostgreSQL database and table;
 
-    pynput library (for keyboard input).
-
-    pygetwindow library (for tracking active windows).
+### Running the Program
+To start the program is enough to run the following program:
+``` bash
+python script.py
+```
