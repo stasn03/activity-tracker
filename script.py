@@ -10,25 +10,18 @@ class ActivityTracker:
         self.last_window= None
         self.conn= self._connect_to_datbase()
 
-    def on_press(self, key):
-        active_window= gw.getActiveWindowTitle()
-        if active_window != self.last_window:
-            self.__save_to_file(f"Switched to: {active_window}")
-            print(f"Switched to: {active_window}")
-            self.last_window= active_window
-
-        print(f"Typed: {key}")
-        self.__save_to_file(f"Typed: {key}")
-        if str(key) == "Key.f12":
-            return False
-
-    def _save_to_file(self, data):
-        os.makedirs("logs", exist_ok= True)
+    def on_release(self, key):
+        cursor= self.conn.cursor()
+        insert_query= """
+        INSERT INTO input_log(context, key_value) 
+        VALUES(%s, %s);
+        """
         try:
-            with open(f'logs/{strftime("%Y-%m-%d", gmtime())}.txt', "a", encoding= "utf-8") as file:
-                file.write(f'[{strftime("%Y-%m-%d %H:%M", gmtime())}] {data} \n')
-        except Exception as e:
-            print(f"An error occured: {e}")
+            print(key.char)
+        except AttributeError:
+            print(key)
+
+
 
     def _connect_to_datbase(self):
         try:
@@ -49,6 +42,6 @@ class ActivityTracker:
 
 tracker= ActivityTracker()
 with keyboard.Listener(
-    on_press= tracker.on_press
+    on_release= tracker.on_release
 ) as listener:
     listener.join()
