@@ -1,5 +1,4 @@
 from pynput import keyboard
-from time import gmtime, strftime
 import pygetwindow as gw
 import psycopg2 
 from DB_DATA import DBNAME, USERNAME, PASSWORD, HOST, PORT
