@@ -32,6 +32,9 @@ class ActivityTracker:
         self.conn.commit()
         cursor.close()
 
+        if str(key) == "Key.f12":
+            return False
+
 
     def _connect_to_database(self):
         try:
@@ -46,8 +49,6 @@ class ActivityTracker:
             return conn
         except Exception as e:
             print(f"Could not connect to the database: {e}")
-
-
 
 
 tracker= ActivityTracker()
